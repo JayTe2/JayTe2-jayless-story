@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>JayLe$$ — ストーリーズに追加</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+padding:24px;background:#09090c;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.card{width:min(430px,100%);text-align:center}
+.logo{font-size:34px;font-weight:800;margin-bottom:8px}
+.sub{color:#aaa;line-height:1.5;margin:0 0 28px}
+button{width:100%;padding:18px;border:0;border-radius:17px;background:#fff;color:#111;
+font-size:17px;font-weight:750;cursor:pointer}
+.note{font-size:12px;color:#777;line-height:1.5;margin-top:18px}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="logo">JayLe$$</div>
+  <p class="sub">このReelをあなたのストーリーズでシェア</p>
+  <button id="share">↗ ストーリーズに追加</button>
+  <p class="note">InstagramアプリがインストールされているiPhoneで開くと、Instagramへ移動します。</p>
+</main>
+
+<script>
+const reel = "https://www.instagram.com/reel/DdeQxDlvREi/";
+const instagramScheme = "instagram://url?url=" + encodeURIComponent(reel);
+
+document.getElementById("share").addEventListener("click", () => {
+  const start = Date.now();
+  window.location.href = instagramScheme;
+
+  // InstagramがカスタムURLを処理できない場合は通常のReelへフォールバック
+  setTimeout(() => {
+    if (Date.now() - start < 1800) {
+      window.location.href = reel;
+    }
+  }, 1200);
+});
+</script>
+</body>
+</html>
